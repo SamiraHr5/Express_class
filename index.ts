@@ -1,8 +1,8 @@
 import express from 'express';
-import studentRoutes from './routes/studentRoutes';
+import studentRoutes from './src/routes/studentRoutes';
 
 const app = express();
-const port = 3000;
+const port = 3003;
 
 app.use('/api', studentRoutes);
 

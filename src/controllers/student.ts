@@ -12,3 +12,24 @@ const students = [
     { matricula: 'a01709225', nombre: 'Francisco Garza', calificacion: 75, adeudos: false },
     { matricula: 'a00121244', nombre: 'Maria Rey', calificacion: 70, adeudos: true },
 ];
+
+export const getStudents = (req: Request, res: Response) => {
+    const studentMessages = students.map(student => {
+        let mensaje = '';
+
+        if (student.calificacion > 90) {
+            mensaje = student.adeudos ? 'Tenias honores pero tienes un adeudo' : 'Te graduaste con honores';
+        } else if (student.calificacion >= 70) {
+            mensaje = 'Pasaste muy apenas';
+        } else {
+            mensaje = student.adeudos ? 'Expulsado' : 'Como no tienes adeudo tienes derecho a un examen de recuperacion';
+        }
+
+        return {
+            matricula: student.matricula,
+            mensaje: mensaje,
+        };
+    });
+
+    res.json(studentMessages);
+};
